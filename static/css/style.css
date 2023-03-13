@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
+
+body {
+    font-family: 'Merienda', cursive;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #497174;
+}
+
+.home-btn {
+    margin-top: 100px;
+}
+
+.intro-msg {
+    text-align: center;
+    margin-top: 15px;
+
+}
+
+.btn-home {
+    background-color: #497174;
+    color: #EFF5F5;
+    margin-right: 50px;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.btn-home:hover,
+.btn-home:active {
+    background-color: #EB6440;
+    color: #D6E4E5;
+}
+
+
+
+.btn-signup1 {
+    background-color: #497174;
+    color: #EFF5F5;
+    margin-right: 50px;
+    text-decoration: none;
+}
+
+
+.logo-e {
+    color: #EB6440;
+}
+
+.btn-signup {
+    background-color: #6E5678;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.home-video {
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+.video {
+    width: 60%;
+    height: 500px;
+}
+
+.thin {
+    font-weight: 500;
+}
+
+.light-bg {
+    background-color: #EFF5F5;
+}
+
+.dark-bg {
+    background-color: #497174;
+}
+
+.main-bg {
+    background-color: #EFF5F5;
+}
+
+.card {
+    border: none;
+    background-color: transparent;
+}
+
+.image-container {
+    position: relative;
+}
+
+.image-flash {
+    position: absolute;
+    bottom: 5%;
+    min-width: 30%;
+    left: -2px;
+    background-color:
+        #EB6440;
+}
+
+.author {
+    color: #EFF5F5;
+    margin: 4px;
+    text-transform: uppercase;
+}
+
+.masthead {
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    height: 33vh;
+    width: 100%;
+}
+
+.masthead-text {
+    background-color: #497174;
+    color: #EFF5F5;
+    position: relative;
+}
+
+.masthead-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.masthead-image:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 90%;
+    height: 100%;
+    width: 150%;
+    background: #497174;
+    -webkit-transform: skew(15deg);
+    -moz-transform: skew(15deg);
+    transform: skew(15deg);
+    z-index: 100;
+}
+
+.post-link {
+    text-decoration: none;
+    color: #497174;
+}
+
+.post-link:hover,
+.page-link {
+    color: #EB6440;
+}
+
+.post-title {
+    margin-top: 20%;
+    margin-left: 5%;
+}
+
+.post-subtitle {
+    margin-left: 5%;
+    color: #EFF5F5;
+}
+
+.btn-signup {
+    background-color: #EB6440;
+    color: #EFF5F5;
+}
+
+.btn-signup:hover,
+.btn-signup:active {
+    background-color: #EFF5F5;
+    color: #EB6440;
+}
+
+.link {
+    color: #EB6440;
+    text-decoration: none;
+}
+
+.link:hover,
+.link:active {
+    color: #497174;
+    text-decoration: underline;
+}
+
+.btn-like {
+    color: #EB6440;
+    border: none;
+    background: transparent;
+}
+
+.btn-like:hover,
+.btn-like:active {
+    color: #EB6440;
+    background: transparent;
+    border: none;
+}
+
+.navbar {
+    background-color: #D6E4E5;
+}
+
+.container {
+    text-align: center;
+}
+
+.footer {
+    background-color: #D6E4E5;
+}
+
+#made-by {
+    color: #EB6440;
+    font-weight: bold;
+}
+
+.footer-btn {
+    color: #497174;
+
+}
+
+.email-logout {
+    text-decoration: none;
+    color: #EB6440;
+}
+
+.btn-login {
+
+    background-color: #EB6440;
+    color: #EFF5F5;
+    margin-right: 50px;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.card-home {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: #D6E4E5;
+    text-align: ;
+}
+
+
+.btn-clp {
+    text-decoration: none;
+    color: #497174;
+}
+
+.btn-clp:hover {
+    color: #EB6440;
+}
+
+.about-head {
+    color: #EB6440;
+
+}
+
+.link-btn {
+    text-decoration: none;
+    color: #EB6440;
+}
+
+
+
+/* Medium devices (tablets, 768px and less) */
+@media screen and (max-width: 768px) {
+    .card-home {
+        width: 100%;
+    }
+}
