@@ -41,14 +41,14 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link">Logout</a>
+                        <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link">Register</a>
+                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">Login</a>
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary">Logout</a>
+                    <a class="btn btn-primary" href="{% url 'account_logout' %}">Logout</a>
                 </div>
             </div>
         </div>
