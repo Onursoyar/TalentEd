@@ -1,8 +1,10 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
-from .forms import CommentForm
+from .forms import AddPostForm, CommentForm
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 class PostList(generic.ListView):
@@ -69,6 +71,25 @@ class PostDetail(View):
         )
 
 
+class AddPost(View):
+    def get(self, request):
+        return render(
+            request,
+            "add_post.html", {'add_post_form': AddPostForm}
+            
+        )
+    
+    def post(self, request):
+        add_post_form = AddPostForm(request.POST, request.FILES)
+
+        if add_post_form.is_valid():
+            form = add_post_form.save(commit=False)
+            form.author = User.objects.get(username=request.user.username)
+            form.slug = form.title.replace(" ", "-")
+            messages.success(request, 'Your post is successfully submitted for approval')
+            form.save()
+            return redirect('talents')
+
 
 class PostLike(View):
     
@@ -80,3 +101,15 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class UserPorfile(View):
+
+    def get(self, request):
+        return render(request, 'profile.html')
+
+
+class MyPosts(View):
+    """Authenticated user views their own poems"""
+    def get(self, request):
+        return render(request, 'my_posts.html', {'posts': Post.objects.filter(author=request.user)})

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    
+    <div class="row profile">
+        <p>Hi {{ user.username }}, we are happy to see you among Us!</p>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <ul class="ms-auto w-100">
+            <li class="profile-item">
+                <a class="btn btn-signup btn-lg profile-item-link " href="{% url 'add_post' %}">Publish a Post</a>
+            </li>
+            <li class="profile-item">
+                <a class="btn btn-signup btn-lg profile-item-link" href="{% url 'my_posts' %}">My Posts</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+{%endblock%}
