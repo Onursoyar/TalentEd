@@ -148,11 +148,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-CLOUDINARY_STORAGE = {
-      'CLOUD_NAME': 'dmuk5ti1r',  
-      'API_KEY': '371242152227428',  
-      'API_SECRET': 'sUiec1alcDzQbg1Ms3fFX7T03Gw'
-}
+# CLOUDINARY_STORAGE = {
+#       'CLOUD_NAME': 'dmuk5ti1r',
+#       'API_KEY': '371242152227428',
+#       'API_SECRET': 'sUiec1alcDzQbg1Ms3fFX7T03Gw'
+# }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
