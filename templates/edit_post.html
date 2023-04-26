@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags%}
+
+<div class="container-fluid post-form-container">
+
+    {% if user.is_authenticated %}
+    <h3 class="title">Edit Post</h3>
+    <p>Editing as: {{ user.username }}</p>
+    <form method="POST">
+        {{ poem_form | crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-signup btn-lg">Update Post</button>
+        {% if updated %}
+        {{ message }}
+    </form>
+    {% endif %}
+    {% endif %}
+   
+</div>
+{%endblock%}

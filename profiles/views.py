@@ -9,7 +9,7 @@ from django.contrib import messages
 
 class PostList(generic.ListView):
     model = Post
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    queryset = Post.objects.order_by("-created_on")
     template_name = "talents.html"
     paginate_by = 6
 
@@ -20,7 +20,7 @@ def index(request):
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Post.objects.filter(status=1)
+        queryset = Post.objects.filter(slug=slug)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("-created_on")
         liked = False
@@ -75,8 +75,7 @@ class AddPost(View):
     def get(self, request):
         return render(
             request,
-            "add_post.html", {'add_post_form': AddPostForm}
-            
+            "publish.html", {'add_post_form': AddPostForm}        
         )
     
     def post(self, request):
@@ -110,6 +109,59 @@ class UserPorfile(View):
 
 
 class MyPosts(View):
-    """Authenticated user views their own poems"""
+    """Authenticated user views their own post"""
     def get(self, request):
         return render(request, 'my_posts.html', {'posts': Post.objects.filter(author=request.user)})
+    
+def publish(request):
+    """publish poem as authenticated user"""
+    if request.method == 'POST':
+        post_form = AddPostForm(request.POST, request.FILES)
+        if post_form.is_valid():
+            form = post_form.save(commit=False)
+            form.author = User.objects.get(username=request.user.username)
+            form.slug = form.title.replace(" ", "-")
+            messages.success(
+                request, 'Your poem is successfully submitted for approval'
+                )
+            form.save()
+        return redirect('my_post')
+
+    post_form = AddPostForm()
+    context = {'post_form': post_form}
+
+    return render(
+        request,
+        'publish.html', context
+    )
+
+
+def my_post(request):
+    """Authenticated user views their own poems"""
+    logged_in_user = request.user
+    logged_in_user_posts = Post.objects.filter(author=logged_in_user)
+    return render(request, 'my_posts.html', {'posts': logged_in_user_posts})
+
+def edit_post(request, post_id):
+    """Authenticated user views and edit their own poems"""
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        post_form = AddPostForm(request.POST, instance=post)
+        if post_form.is_valid():
+            form = post_form.save(commit=False)
+            form.approved = False
+            messages.success(
+                request, 'Updated poem is successfully submitted for approval'
+                )
+            form.save()
+            return redirect('my_post')
+    post_form = AddPostForm(instance=post)
+    context = {'poem_form': post_form}
+    return render(request, 'edit_post.html', context)
+
+def delete_post(request, post_id):
+    """Authenticated user views and edits their own poems"""
+    post = get_object_or_404(Post, id=post_id)
+    post.delete()
+    messages.success(request, 'Post deleted!')
+    return redirect('my_post')

@@ -24,7 +24,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY','1111')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'talented.wsgi.application'
 #     }
 # }
 
-DATABASES = {'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
+DATABASES = {'default': dj_database_url.config(default='postgres://hzrilatz:GL6x6_GNzz1-6leJMDxLcnh9vN6xq_By@mouse.db.elephantsql.com/hzrilatz')}
 
 
 # Password validation
@@ -148,11 +148,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-# CLOUDINARY_STORAGE = {
-#       'CLOUD_NAME': 'dmuk5ti1r',
-#       'API_KEY': '371242152227428',
-#       'API_SECRET': 'sUiec1alcDzQbg1Ms3fFX7T03Gw'
-# }
+CLOUDINARY_STORAGE = {
+      'CLOUD_NAME': 'dmuk5ti1r',  
+      'API_KEY': '371242152227428',  
+      'API_SECRET': 'sUiec1alcDzQbg1Ms3fFX7T03Gw'
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

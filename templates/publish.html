@@ -1,8 +1,8 @@
-{% extends 'base.html' %} 
+{% extends "base.html" %}
+
 {% block content %}
-{% load crispy_forms_tags %}
 
-
+{% load crispy_forms_tags%}
 
 <div class="container-fluid post-form-container">
 
@@ -12,14 +12,14 @@
     {% if user.is_authenticated %}
     <h3 class="title">Publish your post</h3>
     <p>Publishing as: {{ user.username }}</p>
-    <form method="POST" action="{% url 'add_post' %}" enctype="multipart/form-data">
-        {{ add_post_form | crispy }}
+    <form method="POST" action="{% url 'publish' %}" enctype="multipart/form-data">
         {% csrf_token %}
+        {{ post_form | crispy }}
+        
         <button type="submit" class="btn btn-signup btn-lg">Submit</button>
     </form>
     {% endif %}
     {% endif %}
    
 </div>
-
-{% endblock content %}
+{%endblock%}
