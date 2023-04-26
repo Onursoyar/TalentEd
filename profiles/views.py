@@ -41,7 +41,7 @@ class PostDetail(View):
     
     def post(self, request, slug, *args, **kwargs):
 
-        queryset = Post.objects.filter(status=1)
+        queryset = Post.objects.filter(slug=slug)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("-created_on")
         liked = False
@@ -135,13 +135,6 @@ def publish(request):
         'publish.html', context
     )
 
-
-def my_post(request):
-    """Authenticated user views their own poems"""
-    logged_in_user = request.user
-    logged_in_user_posts = Post.objects.filter(author=logged_in_user)
-    return render(request, 'my_posts.html', {'posts': logged_in_user_posts})
-
 def edit_post(request, post_id):
     """Authenticated user views and edit their own poems"""
     post = get_object_or_404(Post, id=post_id)
@@ -150,9 +143,7 @@ def edit_post(request, post_id):
         if post_form.is_valid():
             form = post_form.save(commit=False)
             form.approved = False
-            messages.success(
-                request, 'Updated poem is successfully submitted for approval'
-                )
+            messages.success(request, 'Updated poem is successfully submitted for approval')
             form.save()
             return redirect('my_post')
     post_form = AddPostForm(instance=post)
