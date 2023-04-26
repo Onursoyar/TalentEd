@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 import dj_database_url
 from django.contrib.messages import constants as messages
+
 if os.path.isfile('env.py'):
     import env
 from pathlib import Path
@@ -24,15 +25,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY','1111')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['talent-ed.herokuapp.com', 'localhost']
-
 
 # Application definition
 
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'django_summernote',
     'crispy_forms',
-    'profiles', 
+    'profiles',
 ]
 
 SITE_ID = 1
@@ -60,17 +60,16 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-info',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -113,8 +112,7 @@ WSGI_APPLICATION = 'talented.wsgi.application'
 #     }
 # }
 
-DATABASES = {'default': dj_database_url.config(default='postgres://hzrilatz:GL6x6_GNzz1-6leJMDxLcnh9vN6xq_By@mouse.db.elephantsql.com/hzrilatz')}
-
+DATABASES = {'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -134,7 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -149,9 +146,9 @@ USE_L10N = True
 USE_TZ = True
 
 CLOUDINARY_STORAGE = {
-      'CLOUD_NAME': 'dmuk5ti1r',  
-      'API_KEY': '371242152227428',  
-      'API_SECRET': 'sUiec1alcDzQbg1Ms3fFX7T03Gw'
+    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+    'API_KEY': os.environ.get('API_KEY'),
+    'API_SECRET': os.environ.get('API_SECRET')
 }
 
 # Static files (CSS, JavaScript, Images)
