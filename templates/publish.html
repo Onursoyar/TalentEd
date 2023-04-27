@@ -12,7 +12,7 @@
     {% if user.is_authenticated %}
     <h3 class="title">Publish your post</h3>
     <p>Publishing as: {{ user.username }}</p>
-    <form method="POST" action="{% url 'publish' %}" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'add_post' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ post_form | crispy }}
         

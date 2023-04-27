@@ -14,9 +14,11 @@ class PostList(generic.ListView):
     paginate_by = 6
 
 
-def index(request):
+class IndexView(View):
     """Views for home page"""
-    return render(request, 'index.html')
+
+    def get(self, request):
+        return render(request, 'index.html')
 
 
 class PostDetail(View):
@@ -77,7 +79,7 @@ class AddPost(View):
     def get(self, request):
         return render(
             request,
-            "publish.html", {'add_post_form': PostForm}
+            "publish.html", {'post_form': PostForm}
         )
 
     def post(self, request):
@@ -117,48 +119,28 @@ class MyPosts(View):
         return render(request, 'my_posts.html', {'posts': Post.objects.filter(author=request.user)})
 
 
-def publish(request):
-    """publish post as authenticated user"""
-    if request.method == 'POST':
-        post_form = PostForm(request.POST, request.FILES)
-        if post_form.is_valid():
-            form = post_form.save(commit=False)
-            form.author = User.objects.get(username=request.user.username)
-            form.slug = form.title.replace(" ", "-")
-            messages.success(
-                request, 'Your poem is successfully submitted for approval'
-            )
-            form.save()
-        return redirect('my_post')
-
-    post_form = PostForm()
-    context = {'post_form': post_form}
-
-    return render(
-        request,
-        'publish.html', context
-    )
-
-
-def edit_post(request, post_id):
+class EditPost(View):
     """Authenticated user views and edit their own posts"""
-    post = get_object_or_404(Post, id=post_id)
-    if request.method == 'POST':
+
+    def post(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id)
         post_form = PostForm(request.POST, instance=post)
         if post_form.is_valid():
             form = post_form.save(commit=False)
             form.approved = False
-            messages.success(request, 'Updated poem is successfully submitted for approval')
+            messages.success(request, 'Post has been updated successfully')
             form.save()
-            return redirect('my_post')
-    post_form = PostForm(instance=post)
-    context = {'poem_form': post_form}
-    return render(request, 'edit_post.html', context)
+            return redirect('my_posts')
+        post_form = PostForm(instance=post)
+        context = {'post_form': post_form}
+        return render(request, 'edit_post.html', context)
 
 
-def delete_post(request, post_id):
+class DeletePost(View):
     """Authenticated user views and edits their own poems"""
-    post = get_object_or_404(Post, id=post_id)
-    post.delete()
-    messages.success(request, 'Post deleted!')
-    return redirect('my_post')
+
+    def delete(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id)
+        post.delete()
+        messages.success(request, 'Post deleted!')
+        return redirect('my_posts')
