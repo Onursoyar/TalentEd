@@ -8,6 +8,7 @@ from django.contrib import messages
 
 
 class PostList(generic.ListView):
+    """ View for Talents page"""
     model = Post
     queryset = Post.objects.order_by("-created_on")
     template_name = "talents.html"
@@ -15,15 +16,17 @@ class PostList(generic.ListView):
 
 
 class IndexView(View):
-    """Views for home page"""
+    """View for home page"""
 
     def get(self, request):
         return render(request, 'index.html')
 
 
 class PostDetail(View):
+    """View for post details"""
 
     def get(self, request, slug, *args, **kwargs):
+        """ get post meta data """
         queryset = Post.objects.filter(slug=slug)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("-created_on")
@@ -44,7 +47,7 @@ class PostDetail(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
-
+        """Add comments against specific post"""
         queryset = Post.objects.filter(slug=slug)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("-created_on")
@@ -76,6 +79,8 @@ class PostDetail(View):
 
 
 class AddPost(View):
+    """View for adding new post"""
+
     def get(self, request):
         return render(
             request,
@@ -95,6 +100,7 @@ class AddPost(View):
 
 
 class PostLike(View):
+    """Add like on specific post"""
 
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
@@ -106,21 +112,15 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class UserProfile(View):
-
-    def get(self, request):
-        return render(request, 'profile.html')
-
-
 class MyPosts(View):
-    """Authenticated user views their own post"""
+    """Get user own posts only"""
 
     def get(self, request):
         return render(request, 'my_posts.html', {'posts': Post.objects.filter(author=request.user)})
 
 
 class EditPost(View):
-    """Authenticated user views and edit their own posts"""
+    """Edit user own posts"""
 
     def get(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
@@ -140,7 +140,7 @@ class EditPost(View):
 
 
 class DeletePost(View):
-    """Authenticated user views and edits their own poems"""
+    """Delete user own poems"""
 
     def get(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
