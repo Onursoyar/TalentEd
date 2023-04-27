@@ -41,10 +41,10 @@ class TestCommentForm(TestCase):
 
 
 class TestModels(TestCase):
-    """Unit Testing models has featured image"""
+    """Unit Testing models has title"""
 
-    def test_post_has_featured_image(self):
-        self.assertTrue(Post.featured_image)
+    def test_post_has_title(self):
+        self.assertTrue(Post.title)
 
 
 class TestIndexViews(TestCase):
@@ -57,7 +57,7 @@ class TestIndexViews(TestCase):
 
 
 class TestPostListViews(TestCase):
-    """Unit Test Post List Page View"""
+    """Unit Test talents list Page View"""
 
     def test_get_talents_list_page(self):
         response = self.client.get('/talents/')
@@ -77,7 +77,7 @@ class TestProfileViews(TestCase):
 class TestPublishPoemViews(TestCase):
     """Unit Test Publish Page View"""
 
-    def test_can_publish_poem(self):
-        response = self.client.get('/publish')
+    def test_can_publish_post(self):
+        response = self.client.get('/add-post/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'publish.html')
