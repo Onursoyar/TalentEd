@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
-from .forms import AddPostForm, CommentForm
+from .forms import PostForm, CommentForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -13,9 +13,11 @@ class PostList(generic.ListView):
     template_name = "talents.html"
     paginate_by = 6
 
+
 def index(request):
     """Views for home page"""
     return render(request, 'index.html')
+
 
 class PostDetail(View):
 
@@ -38,7 +40,7 @@ class PostDetail(View):
                 "comment_form": CommentForm()
             },
         )
-    
+
     def post(self, request, slug, *args, **kwargs):
 
         queryset = Post.objects.filter(slug=slug)
@@ -75,11 +77,11 @@ class AddPost(View):
     def get(self, request):
         return render(
             request,
-            "publish.html", {'add_post_form': AddPostForm}        
+            "publish.html", {'add_post_form': PostForm}
         )
-    
+
     def post(self, request):
-        add_post_form = AddPostForm(request.POST, request.FILES)
+        add_post_form = PostForm(request.POST, request.FILES)
 
         if add_post_form.is_valid():
             form = add_post_form.save(commit=False)
@@ -91,7 +93,7 @@ class AddPost(View):
 
 
 class PostLike(View):
-    
+
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
@@ -102,7 +104,7 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class UserPorfile(View):
+class UserProfile(View):
 
     def get(self, request):
         return render(request, 'profile.html')
@@ -110,24 +112,26 @@ class UserPorfile(View):
 
 class MyPosts(View):
     """Authenticated user views their own post"""
+
     def get(self, request):
         return render(request, 'my_posts.html', {'posts': Post.objects.filter(author=request.user)})
-    
+
+
 def publish(request):
-    """publish poem as authenticated user"""
+    """publish post as authenticated user"""
     if request.method == 'POST':
-        post_form = AddPostForm(request.POST, request.FILES)
+        post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
             form = post_form.save(commit=False)
             form.author = User.objects.get(username=request.user.username)
             form.slug = form.title.replace(" ", "-")
             messages.success(
                 request, 'Your poem is successfully submitted for approval'
-                )
+            )
             form.save()
         return redirect('my_post')
 
-    post_form = AddPostForm()
+    post_form = PostForm()
     context = {'post_form': post_form}
 
     return render(
@@ -135,20 +139,22 @@ def publish(request):
         'publish.html', context
     )
 
+
 def edit_post(request, post_id):
-    """Authenticated user views and edit their own poems"""
+    """Authenticated user views and edit their own posts"""
     post = get_object_or_404(Post, id=post_id)
     if request.method == 'POST':
-        post_form = AddPostForm(request.POST, instance=post)
+        post_form = PostForm(request.POST, instance=post)
         if post_form.is_valid():
             form = post_form.save(commit=False)
             form.approved = False
             messages.success(request, 'Updated poem is successfully submitted for approval')
             form.save()
             return redirect('my_post')
-    post_form = AddPostForm(instance=post)
+    post_form = PostForm(instance=post)
     context = {'poem_form': post_form}
     return render(request, 'edit_post.html', context)
+
 
 def delete_post(request, post_id):
     """Authenticated user views and edits their own poems"""

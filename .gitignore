@@ -8,3 +8,7 @@ node_modules/
 .github/
 cloudinary_python.txt
 .idea/
+# database & logs
+*.db
+*.sqlite3
+*.log
