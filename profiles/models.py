@@ -12,7 +12,7 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name="profile_posts"
     )
     featured_image = CloudinaryField('image', default='placeholder')
-    
+
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -23,7 +23,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_on']
-    
+
     def __str__(self):
         return self.title
 
@@ -32,8 +32,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name="comments")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     name = models.CharField(max_length=80)
     created_on = models.DateTimeField(auto_now_add=True)
     body = models.TextField()
-    approved = models.BooleanField(default=False)
