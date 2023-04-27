@@ -122,6 +122,12 @@ class MyPosts(View):
 class EditPost(View):
     """Authenticated user views and edit their own posts"""
 
+    def get(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id)
+        post_form = PostForm(instance=post)
+        context = {'post_form': post_form}
+        return render(request, 'edit_post.html', context)
+
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
         post_form = PostForm(request.POST, instance=post)
@@ -131,15 +137,12 @@ class EditPost(View):
             messages.success(request, 'Post has been updated successfully')
             form.save()
             return redirect('my_posts')
-        post_form = PostForm(instance=post)
-        context = {'post_form': post_form}
-        return render(request, 'edit_post.html', context)
 
 
 class DeletePost(View):
     """Authenticated user views and edits their own poems"""
 
-    def delete(self, request, post_id):
+    def get(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
         post.delete()
         messages.success(request, 'Post deleted!')
