@@ -11,9 +11,4 @@ class CommentForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-<<<<<<< Updated upstream
         fields = ('title',  'featured_image', 'content')
-        
-=======
-        fields = ('title', 'featured_image', 'excerpt', 'content')
->>>>>>> Stashed changes
