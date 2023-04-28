@@ -130,7 +130,7 @@ class EditPost(View):
 
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
-        post_form = PostForm(request.POST, instance=post)
+        post_form = PostForm(request.POST, request.FILES, instance=post)
         if post_form.is_valid():
             form = post_form.save(commit=False)
             form.approved = False
