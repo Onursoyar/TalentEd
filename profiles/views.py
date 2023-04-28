@@ -117,6 +117,13 @@ class MyPosts(View):
 
 
 class EditPost(View):
+    """Edit user own posts"""
+
+    def get(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id)
+        post_form = PostForm(instance=post)
+        context = {'post_form': post_form}
+        return render(request, 'edit_post.html', context)
 
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
