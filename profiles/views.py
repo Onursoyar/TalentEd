@@ -82,15 +82,7 @@ class AddPost(View):
     """View for adding new post"""
 
     def get(self, request):
-        return render(
-            request,
-<<<<<<< Updated upstream
-            "publish.html", {'post_form': PostForm}
-=======
-            "add_post.html", {'add_post_form': PostForm}
-            
->>>>>>> Stashed changes
-        )
+        return render(request, "publish.html", {'post_form': PostForm})
 
     def post(self, request):
         add_post_form = PostForm(request.POST, request.FILES)
@@ -118,7 +110,6 @@ class PostLike(View):
 
 
 class MyPosts(View):
-<<<<<<< Updated upstream
     """Get user own posts only"""
 
     def get(self, request):
@@ -126,35 +117,7 @@ class MyPosts(View):
 
 
 class EditPost(View):
-    """Edit user own posts"""
 
-    def get(self, request, post_id):
-        post = get_object_or_404(Post, id=post_id)
-=======
-    """Authenticated user views their own posts"""
-    def get(self, request):
-        return render(request, 'my_posts.html', {'posts': Post.objects.filter(author=request.user)})
-
-class EditPost(View):
-
-    def post(request, post_id):
-        """Authenticated user views and edit their own posts"""
-        post = get_object_or_404(Post, id=post_id)
-        if request.method == 'POST':
-            post_form = PostForm(request.POST, instance=post)
-            if post_form.is_valid():
-                form = post_form.save(commit=False)
-                messages.success(
-                    request, 'Post updated successfully'
-                    )
-                form.save()
-                return redirect('talents')
->>>>>>> Stashed changes
-        post_form = PostForm(instance=post)
-        context = {'post_form': post_form}
-        return render(request, 'edit_post.html', context)
-
-<<<<<<< Updated upstream
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
         post_form = PostForm(request.POST, request.FILES, instance=post)
@@ -174,12 +137,3 @@ class DeletePost(View):
         post.delete()
         messages.success(request, 'Post deleted!')
         return redirect('my_posts')
-=======
-
-def delete_post(request, post_id):
-    """Authenticated user views and edits their own posts"""
-    post = get_object_or_404(Post, id=post_id)
-    post.delete()
-    messages.success(request, 'Post deleted!')
-    return redirect('talents')
->>>>>>> Stashed changes
