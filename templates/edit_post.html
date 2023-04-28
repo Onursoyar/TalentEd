@@ -9,7 +9,7 @@
     {% if user.is_authenticated %}
     <h3 class="title">Edit Post</h3>
     <p>Editing as: {{ user.username }}</p>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {{ post_form | crispy }}
         {% csrf_token %}
         <button type="submit" class="btn btn-signup btn-lg">Update Post</button>

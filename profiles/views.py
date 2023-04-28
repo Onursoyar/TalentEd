@@ -29,7 +29,7 @@ class PostDetail(View):
         """ get post meta data """
         queryset = Post.objects.filter(slug=slug)
         post = get_object_or_404(queryset, slug=slug)
-        comments = post.comments.filter(approved=True).order_by("-created_on")
+        comments = post.comments.order_by("-created_on")
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -50,7 +50,7 @@ class PostDetail(View):
         """Add comments against specific post"""
         queryset = Post.objects.filter(slug=slug)
         post = get_object_or_404(queryset, slug=slug)
-        comments = post.comments.filter(approved=True).order_by("-created_on")
+        comments = post.comments.order_by("-created_on")
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -157,7 +157,7 @@ class EditPost(View):
 <<<<<<< Updated upstream
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
-        post_form = PostForm(request.POST, instance=post)
+        post_form = PostForm(request.POST, request.FILES, instance=post)
         if post_form.is_valid():
             form = post_form.save(commit=False)
             form.approved = False
