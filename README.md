@@ -563,31 +563,7 @@ During the process of project development, there have been various sources that 
 * [Bootstrap Navbar](https://getbootstrap.com/docs/5.0/components/navbar/)
 * [Bootstrap Modal](https://getbootstrap.com/docs/5.1/components/modal/#tooltips-and-popovers)
 * [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/)
-* [User registration email form and views by Corey Schafer](https://www.youtube.com/watch?v=q4jPR-M0TAQ&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=6) for future email verification purposes.
-    * forms.py 
-        ```python
-        class UserRegisterForm(UserCreationForm):
-        email = forms.EmailField()
-
-        class Meta:
-            model = User
-            fields = ['username', 'email', 'password1', 'password2']
-        ```
-    * Views.py
-        ```python
-            def register(request):
-                if request.method == 'POST':
-                    form = UserRegisterForm(request.POST)
-                    if form.is_valid():
-                        form.save()
-                        username = form.cleaned_data.get('username')
-                        messages.success(request, f'Account created for {username}!')
-                        return redirect('profile')
-                    else:
-                        form = UserRegisterForm()
-                return render(request, 'account/signup.html', {'form': form})
-
-        ```
+* [User registration email form and views by Corey Schafer](https://www.youtube.com/watch?v=q4jPR-M0TAQ&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=6) 
 * I have taken my inspiration for the project from the blog applications that we have done with the code institute. On top of that I have taken logic, some code and general information and structure from this profile and project [Click here](https://github.com/MerveKucukzoroglu/harmonic-poems).
 
 
