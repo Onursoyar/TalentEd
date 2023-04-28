@@ -127,13 +127,13 @@ My user stories can be checked [here](https://github.com/Onursoyar/TalentEd/issu
     * The registered  members can like and comment on a post.
 
 
-# Future Features
+## Future Features
 * Connect with Google translate API, so users can submit posts from different languages.
 * Add more functions, such as to edit or delete a comment driectly while commenting.
 * Add a chat function, so that the members can privately chat with eachother.
 
 
-# Structure
+## Structure
 The structure plan for TalentEd is to keep it simple and clean. The simplicity helps user to easily access and navigate within the website. 
 
 Throughout the project development, GitHub projects is used. Click [here](https://github.com/Onursoyar/TalentEd) to view the process.
@@ -145,13 +145,13 @@ Post model handles talent post details: the title, content, approval status, dat
 ## Comment Model:
 Comment model handles the content of the comment, the username of the person commenting, date/time of commenting.
 
-# Technologies Used:
+## Technologies Used:
 * HTML
 * CSS
 * JavaScript
 * Python
 
-# Frameworks, Libraries & Tools Used
+## Frameworks, Libraries & Tools Used
 * Bootstrap - grid, layout, columns, cards and forms structure.
 * Django - django frameworks to manage apps.
 * GitHub - to store the overall project repository.
@@ -159,13 +159,13 @@ Comment model handles the content of the comment, the username of the person com
 * Balsamiq Wireframes - To design the wireframe of the complete project.
 * Google Fonts - to brandize 'Harmonic Poems' with google fonts. Used for logo and all the written content.
 * Fontawesome - fontawesome icons for social media links and as additional design.
-* Heroku - for the [deployement](#deployment) of the project.
+* Heroku - for the [deployment](#deployment) of the project.
 * Coolors - to choose the color palette and color shades.
 * PostgreSQL - database storage of the models.
 * Cloudinary - image and static files storage.
 
 
-# Deployment:
+## Deployment:
 This project was deployed to Heroku. "Heroku is a cloud platform that lets companies build, deliver, monitor and scale apps."- [Heroku.](https://www.heroku.com/)
 
 <details>
@@ -174,7 +174,7 @@ This project was deployed to Heroku. "Heroku is a cloud platform that lets compa
 <ul>
     <li>
         <a href="https://signup.heroku.com/">Signup here </a>if you do not have an account already.
-        <img src="instructions/heroku.png">
+        <img src="instructions/heorku.png">
     </li>
     <li>
         After you fill in all the information for account and sign in, you will be on <a href="https://dashboard.heroku.com/apps">Dashbord.</a> Here it is where you will create an application.
@@ -549,7 +549,7 @@ If using Gitpod, you can click below to create your own workspace using this rep
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MerveKucukzoroglu/reading-tracker)
 
 
-# Credits
+## Credits
 During the process of project development, there have been various sources that gave me idea how to do a particular feature or fix a bug. The following are the sources that I got knowledge from:
 * [Stack Overflow](https://stackoverflow.com/)
 * [Django Allauth](https://django-allauth.readthedocs.io/en/latest/#)
@@ -562,5 +562,5 @@ During the process of project development, there have been various sources that 
 * I have taken my inspiration for the project from the blog applications that we have done with the code institute. On top of that I have taken logic, some code and general information and structure from this profile and project [Click here](https://github.com/MerveKucukzoroglu/harmonic-poems).
 
 
-# Acknowledgements
+## Acknowledgements
 I would like to acknowledge and present my thanks to my mentor at Code Insitute for his guidance and constant support. It wouldn't have been possible without the amazing community in Slack, Tutors of Code insitute Tutor supports, and my friends who constantly motivated and supported me.

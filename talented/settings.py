@@ -25,7 +25,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'NOne')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -112,7 +112,7 @@ WSGI_APPLICATION = 'talented.wsgi.application'
 #     }
 # }
 
-DATABASES = {'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
+DATABASES = {'default': dj_database_url.config(default='postgres://hzrilatz:GL6x6_GNzz1-6leJMDxLcnh9vN6xq_By@mouse.db.elephantsql.com/hzrilatz')}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
